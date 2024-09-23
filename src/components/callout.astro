@@ -1,0 +1,41 @@
+---
+export interface Props {
+	icon?: string;
+	iconDescription?: string;
+}
+
+const { icon = "👻", iconDescription = "ghost" } = Astro.props;
+---
+
+<div class="callout">
+	<span role="img" aria-label="{iconDescription}">
+		{icon}
+	</span>
+	<div class="content">
+		<slot />
+	</div>
+</div>
+
+<style>
+	.callout {
+		align-items: center;
+		background: lightyellow;
+		border: 1px solid #dd0;
+		border-radius: 0.25rem;
+		display: flex;
+		gap: 1rem;
+		margin: 1rem 0;
+		padding: 0.5rem;
+
+		span {
+			display: inline-block;
+			font-size: 1.25rem;
+			inline-size: 1.5rem;
+			line-height: 1;
+		}
+
+		p {
+			margin: 0;
+		}
+	}
+</style>
