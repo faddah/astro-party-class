@@ -3,6 +3,7 @@ import "@fontsource-variable/urbanist";
 import "../styles/global.css";
 import Callout from "../components/callout.astro";
 import Layout from "../layouts/default.astro";
+import { Counter } from "../components/counter.react";
 
 const headTitle = "Astro Party!! 🎉 🥳";
 const pageTItle = "It's A Freakin' Astro Party, Dude! 🎉 🥳";
@@ -10,6 +11,11 @@ const pageTItle = "It's A Freakin' Astro Party, Dude! 🎉 🥳";
 
 <Layout headTitle={headTitle} pageTitle={pageTItle}>
 	<h1>{pageTItle}</h1>
+
+	<p>
+		Click this button for luck:
+		<Counter client:visible />
+	</p>
 
 	<Callout icon="🔥" iconDescription="fire">
 		<p>Oooh, dang, bruv! Lookkit dis! 👀</p>
