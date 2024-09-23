@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 const headTitle = "Astro Party!! 🎉 🥳";
 const pageTItle = "It's a freakin' Astro Party, dude! 🎉 🥳";
 ---
@@ -12,6 +14,41 @@ const pageTItle = "It's a freakin' Astro Party, dude! 🎉 🥳";
 		<title>{headTitle}</title>
 	</head>
 	<body>
-		<h1>{pageTItle}</h1>
+		<header>
+			<a href="/" rel="home">{headTitle}</a>
+
+			<nav>
+				<a href="/" rel="Home">Home</a>
+				<a href="/about" rel="about">About</a>
+				<a href="/holidays" rel="holidays">Holidays</a>
+				<a href="/pokemon" rel="pokemon">Pokemon</a>
+				<a href="/ideas" rel="ideas">Ideas</a>
+			</nav>
+		</header>
+
+		<main>
+			<h1>{pageTItle}</h1>
+		</main>
 	</body>
 </html>
+
+<style>
+	header {
+		align-items: center;
+		background-color: #005;
+		color: #ddd;
+		display: flex;
+		justify-content: space-between;
+		padding: 1rem max(5dvi, 2rem);
+
+		nav {
+			display: flex;
+			gap: 1rem;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
+	}
+</style>
