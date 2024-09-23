@@ -22,7 +22,7 @@ const { headTitle, pageTitle, frontmatter }: Props = Astro.props;
 	</head>
 	<body>
 		<header>
-			<a href="/" rel="home">{pageTitle ?? frontmatter?.pageTitle}</a>
+			<a href="/" rel="home">{headTitle ?? frontmatter?.headTitle}</a>
 
 			<nav>
 				<a href="/" rel="Home">Home</a>
