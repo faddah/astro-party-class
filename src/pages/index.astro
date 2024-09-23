@@ -1,6 +1,7 @@
 ---
 import "@fontsource-variable/urbanist";
 import "../styles/global.css";
+import Callout from "../components/callout.astro";
 
 const headTitle = "Astro Party!! 🎉 🥳";
 const pageTItle = "It's A Freakin' Astro Party, Dude! 🎉 🥳";
@@ -29,6 +30,10 @@ const pageTItle = "It's A Freakin' Astro Party, Dude! 🎉 🥳";
 
 		<main>
 			<h1>{pageTItle}</h1>
+
+			<Callout icon="🔥" iconDescription="fire">
+				<p>Oooh, dang, bruv! Lookkit dis! 👀</p>
+			</Callout>
 		</main>
 	</body>
 </html>
