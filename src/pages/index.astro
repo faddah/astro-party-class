@@ -2,41 +2,19 @@
 import "@fontsource-variable/urbanist";
 import "../styles/global.css";
 import Callout from "../components/callout.astro";
+import Layout from "../layouts/default.astro";
 
 const headTitle = "Astro Party!! 🎉 🥳";
 const pageTItle = "It's A Freakin' Astro Party, Dude! 🎉 🥳";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{headTitle}</title>
-	</head>
-	<body>
-		<header>
-			<a href="/" rel="home">{headTitle}</a>
+<Layout headTitle={headTitle} pageTitle={pageTItle}>
+	<h1>{pageTItle}</h1>
 
-			<nav>
-				<a href="/" rel="Home">Home</a>
-				<a href="/about" rel="about">About</a>
-				<a href="/holidays" rel="holidays">Holidays</a>
-				<a href="/pokemon" rel="pokemon">Pokemon</a>
-				<a href="/ideas" rel="ideas">Ideas</a>
-			</nav>
-		</header>
-
-		<main>
-			<h1>{pageTItle}</h1>
-
-			<Callout icon="🔥" iconDescription="fire">
-				<p>Oooh, dang, bruv! Lookkit dis! 👀</p>
-			</Callout>
-		</main>
-	</body>
-</html>
+	<Callout icon="🔥" iconDescription="fire">
+		<p>Oooh, dang, bruv! Lookkit dis! 👀</p>
+	</Callout>
+</Layout>
 
 <style>
 	header {
