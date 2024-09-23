@@ -34,6 +34,8 @@ const { Content } = await holiday.render();
 			width="800"
 			height="500"
 			loading="eager"
+			transition:name={`holiday-img-${holiday.slug}`}
+			transition:animate="initial"
 		/>
 
 		<figcaption class="holiday-caption">
@@ -42,7 +44,9 @@ const { Content } = await holiday.render();
 	</figure>
 
 	<div class="holiday-content">
-		<h1>
+		<h1
+			transition:name={`holiday-title-${holiday.slug}`}
+			transition:animate="initial">
 			{holiday.data.title}
 		</h1>
 
