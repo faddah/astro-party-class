@@ -5,7 +5,7 @@ image:
   alt: white living room with large, decorated christmas tree, candles and presents.
   credit: Sandra Seitamaa on Unsplash
 date: 2023-11-25
-tags: [santa, presents]
+tags: [santa, presents, peace]
 ---
 
 I've been good all year, Santa!  🎅 🎄
