@@ -1,6 +1,6 @@
 /// <reference path="../.astro/types.d.ts" />
 interface ImportMetaEnv {
-	readonly ITEMS_PER_PAGE: number;
+	readonly ITEMS_PER_PAGE: string;
 	// more env variables...
 }
 
