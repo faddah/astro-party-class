@@ -24,10 +24,12 @@ const pageTitle = "Holidays";
 							widths={[400, 600, 800, 1200]}
 							transition:name={`holiday-img-${holiday.slug}`}
 							transition:animate="initial"
+							transition:durations={300}
 						/>
 						<h2
 							transition:name={`holiday-title-${holiday.slug}`}
-							transition:animate="initial">
+							transition:animate="initial"
+							transition:duration={300}>
 							<a href={`/holidays/${holiday.slug}`}>{holiday.data.title}</a>
 						</h2>
 
