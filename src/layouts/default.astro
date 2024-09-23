@@ -1,4 +1,5 @@
 ---
+import { ViewTransitions } from "astro:transitions";
 import "@fontsource-variable/urbanist";
 import "../styles/global.css";
 import Callout from "../components/callout.astro";
@@ -19,6 +20,7 @@ const { headTitle, pageTitle, frontmatter }: Props = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{headTitle ?? frontmatter?.headTitle}</title>
+		<ViewTransitions />
 	</head>
 	<body>
 		<header>
