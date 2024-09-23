@@ -1,0 +1,68 @@
+---
+import "@fontsource-variable/urbanist";
+import "../styles/global.css";
+import Callout from "../components/callout.astro";
+
+export interface Props {
+	headTitle: string;
+	pageTitle: string;
+	frontmatter?: { headTitle: string; pageTitle: string };
+}
+
+const { headTitle, pageTitle, frontmatter }: Props = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{headTitle ?? frontmatter?.headTitle}</title>
+	</head>
+	<body>
+		<header>
+			<a href="/" rel="home">{pageTitle ?? frontmatter?.pageTitle}</a>
+
+			<nav>
+				<a href="/" rel="Home">Home</a>
+				<a href="/about" rel="about">About</a>
+				<a href="/test" rel="test">Test</a>
+				<a href="/holidays" rel="holidays">Holidays</a>
+				<a href="/pokemon" rel="pokemon">Pokemon</a>
+				<a href="/ideas" rel="ideas">Ideas</a>
+			</nav>
+		</header>
+
+		<main>
+			<slot />
+		</main>
+	</body>
+</html>
+
+<style>
+	header {
+		align-items: center;
+		background-color: #005;
+		color: #ddd;
+		display: flex;
+		justify-content: space-between;
+		padding: 1rem max(5dvi, 2rem);
+
+		nav {
+			display: flex;
+			gap: 1rem;
+		}
+
+		a {
+			color: inherit;
+			text-decoration: none;
+		}
+	}
+
+	main {
+		inline-size: min(800px, 90dvi);
+		margin-inline: auto;
+		padding: 3rem 0;
+	}
+</style>
