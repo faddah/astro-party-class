@@ -1,7 +1,7 @@
 ---
 layout: '../layouts/default.astro'
-headTitle: It's The About Page, Dude.
-pageTitle: About
+headTitle: About
+pageTitle: It's The About Page, Dude.
 ---
 
 # It's The About Page, Dude
