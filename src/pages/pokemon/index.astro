@@ -1,0 +1,17 @@
+---
+import Layout from "../../layouts/default.astro";
+
+console.log(import.meta.env.ITEMS_PER_PAGE);
+const itemsPerPage = parseInt(import.meta.env.ITEMS_PER_PAGE, 10);
+
+const headTitle = "Pokémon";
+const pageTitle = "Pokémon";
+---
+
+<Layout pageTitle={pageTitle} headTitle={headTitle}>
+	<h1>{pageTitle}</h1>
+
+	<h3>Items Per Page: {itemsPerPage}</h3>
+
+	<p>TODO: list every frickin' Pokémon</p>
+</Layout>
