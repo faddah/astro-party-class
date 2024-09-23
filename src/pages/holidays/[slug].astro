@@ -1,0 +1,51 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+import Layout from "../../layouts/default.astro";
+
+export async function getStaticPaths() {
+	const holidays = await getCollection("holidays");
+
+	return holidays.map((holiday) => {
+		return {
+			params: { slug: holiday.slug },
+			props: {
+				holiday,
+				holidays,
+			},
+		};
+	});
+}
+
+const { holiday, holidays } = Astro.props;
+const { Content } = await holiday.render();
+---
+
+<Layout headTitle={holiday.data.title} pageTitle={holiday.data.title}>
+	<nav class="subnav flex">
+		<a href="/holidays">&larr; All holidays</a>
+		{holidays.map((h) => <a href={`/holidays/${h.slug}`}>{h.data.title}</a>)}
+	</nav>
+
+	<figure>
+		<Image
+			src={holiday.data.image.src}
+			alt={holiday.data.image.alt}
+			width="800"
+			height="500"
+			loading="eager"
+		/>
+
+		<figcaption class="holiday-caption">
+			{holiday.data.image.credit}
+		</figcaption>
+	</figure>
+
+	<div class="holiday-content">
+		<h1>
+			{holiday.data.title}
+		</h1>
+
+		<Content />
+	</div>
+</Layout>
