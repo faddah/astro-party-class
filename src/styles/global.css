@@ -196,3 +196,13 @@ div:has(.poke-placeholder-text) {
   white-space: nowrap;
   border-width: 0;
 }
+
+.holiday-caption {
+  font-size: 0.75rem;
+  font-style: italic;
+  margin-block-start: 0 0.5rem;
+}
+
+.holiday-content {
+  margin-left: 2rem;
+}
