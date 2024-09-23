@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../../layouts/default.astro";
+
+const holidays = await getCollection("holidays");
+const headTitle = "Holidays";
+const pageTitle = "Holidays";
+---
+
+<Layout headTitle={headTitle} pageTitle={pageTitle}>
+	<h1>{pageTitle}</h1>
+
+	<section class="holidays flex">
+		{
+			holidays.map((holiday: any) => {
+				return (
+					<div class="box">
+						<Image
+							src={holiday.data.image.src}
+							alt={holiday.data.image.alt}
+							width="800"
+							height="500"
+							widths={[400, 600, 800, 1200]}
+						/>
+						<h2>
+							<a href={`/holidays/${holiday.slug}`}>{holiday.data.title}</a>
+						</h2>
+
+						<p>{holiday.data.tags.map((tag: string) => `#${tag}`).join(" ")}</p>
+					</div>
+				);
+			})
+		}
+	</section>
+</Layout>
