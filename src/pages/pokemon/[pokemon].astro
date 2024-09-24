@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import Layout from "../../layouts/default.astro";
+
+// turn off prerendering/SSR to prevent hitting pokeapi too hard.
+export const prerender = false;
+
+interface PokemonData {
+	name: string;
+	sprites: {
+		front_default: string;
+	};
+}
+
+const { pokemon } = Astro.params;
+
+let response: Response = new Response();
+try {
+	response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
+	if (!response.ok) {
+		throw new Error(`Failed to fetch Pokémon ${pokemon}.`);
+	}
+} catch (error) {
+	console.error(`Failed to fetch Pokémon ${pokemon} with: ${error}.`);
+}
+
+const pokemonData: PokemonData = response.ok
+	? await response.json()
+	: { name: "", sprites: { front_default: "" } };
+const headTitle: string = `Pokémon: ${pokemonData.name}`;
+const pageTitle: string = pokemonData.name;
+
+const backUrl = new URL(Astro.url);
+backUrl.pathname = "/pokemon";
+
+let imageUrl: string;
+const images = pokemonData.sprites;
+
+if (images.other?.["official-artwork"]?.front_default) {
+	imageUrl = images.other["official-artwork"].front_default;
+} else if (images.other?.dream_world?.front_default) {
+	imageUrl = images.other.dream_world?.front_default;
+} else {
+	imageUrl = images.front_default;
+}
+---
+
+<Layout pageTitle={pageTitle} headTitle={headTitle}>
+	<nav class="subnav flex">
+		<a href={backUrl}><h3>&larr; All Pokémon</h3></a>
+	</nav>
+	<Image src={imageUrl} alt={pageTitle} width={200} height={200} />
+	<h1>{pageTitle}</h1>
+</Layout>
