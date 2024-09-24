@@ -1,16 +1,46 @@
 ---
 import Layout from "../../layouts/default.astro";
+import PokemonPreview from "../../components/pokemon-preview.astro";
 
-const itemsPerPage = parseInt(import.meta.env.ITEMS_PER_PAGE, 10);
+const itemsPerPage = import.meta.env.ITEMS_PER_PAGE;
 
-const headTitle = "Pokémon";
+const apiUrl = new URL(`https://pokeapi.co`);
+apiUrl.pathname = "/api/v2/pokemon";
+apiUrl.searchParams.set("limit", itemsPerPage);
+
+let response: Response = new Response();
+try {
+	response = await fetch(apiUrl);
+	if (!response.ok) {
+		throw new Error(`Failed to fetch Pokémon.`);
+	}
+} catch (error) {
+	console.error(`Failed to fetch Pokémon with: ${error}.`);
+}
+
+const headTitle = "Pokémon 🐱";
 const pageTitle = "Pokémon";
+
+const { results } = response.ok ? await response.json() : [];
 ---
 
 <Layout pageTitle={pageTitle} headTitle={headTitle}>
 	<h1>{pageTitle}</h1>
 
-	<h3>Items Per Page: {itemsPerPage}</h3>
+	<!-- <h3>Items Per Page: {itemsPerPage}</h3>
 
-	<p>TODO: list every frickin' Pokémon</p>
+	<p>TODO: list every frickin' Pokémon</p> -->
+	<section class="box">
+		<ul class="list flex">
+			{
+				results.map((pokemon: { name: string }) => {
+					return (
+						<li class="item" key={pokemon.name}>
+							<PokemonPreview pokemon={pokemon.name} />
+						</li>
+					);
+				})
+			}
+		</ul>
+	</section>
 </Layout>
