@@ -8,6 +8,9 @@ const apiUrl = new URL(`https://pokeapi.co`);
 apiUrl.pathname = "/api/v2/pokemon";
 apiUrl.searchParams.set("limit", itemsPerPage);
 
+const page: number = Number(Astro.url.searchParams.get("page") ?? 1);
+console.log({ page });
+
 let response: Response = new Response();
 try {
 	response = await fetch(apiUrl);
