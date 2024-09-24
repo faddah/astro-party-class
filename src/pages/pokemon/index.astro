@@ -2,6 +2,8 @@
 import Layout from "../../layouts/default.astro";
 import PokemonPreview from "../../components/pokemon-preview.astro";
 
+export const prerender = false;
+
 const itemsPerPage = import.meta.env.ITEMS_PER_PAGE;
 
 const apiUrl = new URL(`https://pokeapi.co`);
@@ -9,7 +11,7 @@ apiUrl.pathname = "/api/v2/pokemon";
 apiUrl.searchParams.set("limit", itemsPerPage);
 
 const page: number = Number(Astro.url.searchParams.get("page") ?? 1);
-console.log({ page });
+apiUrl.searchParams.set("offset", String((page - 1) * Number(itemsPerPage)));
 
 let response: Response = new Response();
 try {
@@ -25,6 +27,17 @@ const headTitle = "Pokémon 🐱";
 const pageTitle = "Pokémon";
 
 const { results } = response.ok ? await response.json() : [];
+
+const maxPages = Math.ceil(1118 / Number(itemsPerPage));
+
+const prevPage: number | boolean = page > 1 ? Math.max(1, page - 1) : false;
+const prevUrl = new URL(Astro.url);
+prevUrl.searchParams.set("page", String(prevPage));
+
+const nextPage: number | boolean =
+	page < maxPages ? Math.min(page + 1, maxPages) : false;
+const nextUrl = new URL(Astro.url);
+nextUrl.searchParams.set("page", String(nextPage));
 ---
 
 <Layout pageTitle={pageTitle} headTitle={headTitle}>
@@ -46,4 +59,35 @@ const { results } = response.ok ? await response.json() : [];
 			}
 		</ul>
 	</section>
+	<section class="pagination">
+		<nav class="subnav flex">
+			{
+				prevPage ? (
+					<a href={prevUrl}>
+						<h3>&larr; Previous Page</h3>
+					</a>
+				) : null
+			}
+			<p class="page-number">Page {page}</p>
+			{
+				nextPage ? (
+					<a href={nextUrl}>
+						<h3>Next Page &rarr;</h3>
+					</a>
+				) : null
+			}
+		</nav>
+	</section>
 </Layout>
+
+<style>
+	.pagtination {
+		display: flex;
+		align-items: center;
+		margin: 1rem auto;
+	}
+
+	.page-number {
+		margin: 1.75rem auto;
+	}
+</style>
