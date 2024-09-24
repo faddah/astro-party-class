@@ -35,7 +35,7 @@ const { results } = response.ok ? await response.json() : [];
 			{
 				results.map((pokemon: { name: string }) => {
 					return (
-						<li class="item" key={pokemon.name}>
+						<li class="item">
 							<PokemonPreview pokemon={pokemon.name} />
 						</li>
 					);
