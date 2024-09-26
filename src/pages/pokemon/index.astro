@@ -4,9 +4,7 @@ import PokemonPreview from "../../components/pokemon-preview.astro";
 
 export const prerender = false;
 
-console.log(import.meta.env.ITEMS_PER_PAGE);
 const itemsPerPage = import.meta.env.ITEMS_PER_PAGE;
-console.log({ itemsPerPage });
 
 const apiUrl = new URL(`https://pokeapi.co`);
 apiUrl.pathname = "/api/v2/pokemon";
