@@ -38,6 +38,13 @@ const nextPage: number | boolean =
 	page < maxPages ? Math.min(page + 1, maxPages) : false;
 const nextUrl = new URL(Astro.url);
 nextUrl.searchParams.set("page", String(nextPage));
+
+const pageNumberClass =
+	page === 1
+		? "first-page-number"
+		: page === maxPages
+			? "last-page-number"
+			: "pagination";
 ---
 
 <Layout pageTitle={pageTitle} headTitle={headTitle}>
@@ -68,7 +75,7 @@ nextUrl.searchParams.set("page", String(nextPage));
 					</a>
 				) : null
 			}
-			<p class="page-number">Page {page}</p>
+			<h3 class="page-number">Page {page}</h3>
 			{
 				nextPage ? (
 					<a href={nextUrl}>
@@ -84,10 +91,25 @@ nextUrl.searchParams.set("page", String(nextPage));
 	.pagtination {
 		display: flex;
 		align-items: center;
-		margin: 1rem auto;
+		justify-content: space-around;
+		margin: fauto;
 	}
 
 	.page-number {
-		margin: 1.75rem auto;
+		display: flex;
+		align-items: center;
+		margin: 0.125rem 0 0 0;
+	}
+
+	.first-page-number {
+		display: flex;
+		align-items: center;
+		margin: 0.25rem 7rem;
+	}
+
+	.last-page-number {
+		display: flex;
+		align-items: center;
+		margin: 0.25rem 8rem;
 	}
 </style>
