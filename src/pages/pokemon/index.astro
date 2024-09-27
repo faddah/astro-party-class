@@ -30,7 +30,7 @@ const { results } = response.ok ? await response.json() : [];
 
 const maxPages = Math.ceil(1118 / Number(itemsPerPage));
 
-let hideOrShowPrevious: string | null;
+let hideOrShowPrevious: string | null = null;
 const prevPage: number | string =
 	page > 1
 		? Math.max(1, page - 1)
@@ -38,7 +38,7 @@ const prevPage: number | string =
 const prevUrl = new URL(Astro.url);
 prevUrl.searchParams.set("page", String(prevPage));
 
-let hideOrShowNext: string | null;
+let hideOrShowNext: string | null = null;
 const nextPage: number | string =
 	page < maxPages
 		? Math.min(page + 1, maxPages)
