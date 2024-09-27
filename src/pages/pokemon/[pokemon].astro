@@ -5,9 +5,7 @@ import Layout from "../../layouts/default.astro";
 // turn off prerendering/SSR to prevent hitting pokeapi too hard.
 export const prerender = false;
 
-console.log(import.meta.env.ITEMS_PER_PAGE);
 const itemsPerPage: any = Number(import.meta.env.ITEMS_PER_PAGE);
-console.log({ itemsPerPage });
 
 interface PokemonData {
 	name: string;
