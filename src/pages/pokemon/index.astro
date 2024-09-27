@@ -30,12 +30,19 @@ const { results } = response.ok ? await response.json() : [];
 
 const maxPages = Math.ceil(1118 / Number(itemsPerPage));
 
-const prevPage: number | boolean = page > 1 ? Math.max(1, page - 1) : false;
+let hideOrShowPrevious: string | null;
+const prevPage: number | string =
+	page > 1
+		? Math.max(1, page - 1)
+		: (hideOrShowPrevious = `hide-previous-or-next`);
 const prevUrl = new URL(Astro.url);
 prevUrl.searchParams.set("page", String(prevPage));
 
-const nextPage: number | boolean =
-	page < maxPages ? Math.min(page + 1, maxPages) : false;
+let hideOrShowNext: string | null;
+const nextPage: number | string =
+	page < maxPages
+		? Math.min(page + 1, maxPages)
+		: (hideOrShowNext = `hide-previous-or-next`);
 const nextUrl = new URL(Astro.url);
 nextUrl.searchParams.set("page", String(nextPage));
 
@@ -70,7 +77,7 @@ const pageNumberClass =
 		<nav class="subnav flex">
 			{
 				prevPage ? (
-					<a href={prevUrl}>
+					<a class={hideOrShowPrevious} href={prevUrl}>
 						<h3>&larr; Previous Page</h3>
 					</a>
 				) : null
@@ -78,7 +85,7 @@ const pageNumberClass =
 			<h3 class={pageNumberClass}>Page {page}</h3>
 			{
 				nextPage ? (
-					<a href={nextUrl}>
+					<a class={hideOrShowNext} href={nextUrl}>
 						<h3>Next Page &rarr;</h3>
 					</a>
 				) : null
@@ -91,8 +98,8 @@ const pageNumberClass =
 	.pagination {
 		display: flex;
 		align-items: center;
-		justify-content: space-evenly;
-		margin: auto;
+		justify-content: space-around;
+		margin: 0 auto;
 	}
 
 	.page-number {
@@ -111,5 +118,9 @@ const pageNumberClass =
 		display: flex;
 		align-items: center;
 		margin: 0.25rem 8rem;
+	}
+
+	.hide-previous-or-next {
+		visibility: hidden;
 	}
 </style>
