@@ -36,15 +36,10 @@ const pageTitle: string = pokemonData.name;
 
 const backUrl = new URL(Astro.url);
 backUrl.pathname = "/pokemon";
-// if (!isNaN(itemsPerPage) && pokemon?.id && !isNaN(pokemon.id)) {
 backUrl.searchParams.set(
 	"page",
 	Math.floor(pokemon?.id / itemsPerPage + 1).toString()
 );
-// } else {
-// backUrl.searchParams.set("page", "1");
-// console.error("Invalid itemsPerPage or pokemon.id");
-// }
 
 let imageUrl: string;
 const images = pokemonData.sprites;
