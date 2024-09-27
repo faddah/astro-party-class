@@ -5,18 +5,23 @@ import Layout from "../../layouts/default.astro";
 // turn off prerendering/SSR to prevent hitting pokeapi too hard.
 export const prerender = false;
 
-const itemsPerPage: any = Number(import.meta.env.ITEMS_PER_PAGE);
+const itemsPerPage: number = Number(import.meta.env.ITEMS_PER_PAGE);
 
 interface PokemonData {
+	id: number;
 	name: string;
 	sprites: {
 		front_default: string;
 	};
 }
 
-const { pokemon }: Record<string, string | undefined> = Astro.params;
+const { pokemon } = Astro.params as { pokemon?: string };
 
-let response: Response = new Response();
+if (!pokemon) {
+	throw new Error("Pokemon parameter is missing.");
+}
+
+let response: Response | null = null;
 try {
 	response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon}`);
 	if (!response.ok) {
@@ -25,10 +30,10 @@ try {
 } catch (error) {
 	console.error(`Failed to fetch Pokémon ${pokemon} with: ${error}.`);
 }
-
-const pokemonData: PokemonData = response.ok
-	? await response.json()
-	: { name: "", sprites: { front_default: "" } };
+const pokemonData: PokemonData =
+	response && response.ok
+		? await response.json()
+		: { id: 0, name: "", sprites: { front_default: "" } };
 const headTitle: string = `Pokémon: ${pokemonData.name}`;
 const pageTitle: string = pokemonData.name;
 
@@ -36,7 +41,7 @@ const backUrl = new URL(Astro.url);
 backUrl.pathname = "/pokemon";
 backUrl.searchParams.set(
 	"page",
-	Math.floor(pokemon?.id / itemsPerPage + 1).toString()
+	Math.floor(pokemonData.id / itemsPerPage + 1).toString()
 );
 
 let imageUrl: string;
