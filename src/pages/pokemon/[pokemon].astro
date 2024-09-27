@@ -23,6 +23,25 @@ interface PokemonData {
 	};
 }
 
+interface Images {
+	other?: {
+		"official-artwork"?: {
+			front_default: string;
+		};
+		dream_world?: {
+			front_default: string;
+		};
+	};
+	front_default: string;
+}
+
+interface URL {
+	pathname: string;
+	searchParams: {
+		set: (key: string, value: string) => void;
+	};
+}
+
 const { pokemon } = Astro.params as { pokemon?: string };
 
 if (!pokemon) {
@@ -38,6 +57,7 @@ try {
 } catch (error) {
 	console.error(`Failed to fetch Pokémon ${pokemon} with: ${error}.`);
 }
+
 const pokemonData: PokemonData =
 	response && response.ok
 		? await response.json()
@@ -45,7 +65,7 @@ const pokemonData: PokemonData =
 const headTitle: string = `Pokémon: ${pokemonData.name}`;
 const pageTitle: string = pokemonData.name;
 
-const backUrl = new URL(Astro.url);
+const backUrl: URL = new URL(Astro.url);
 backUrl.pathname = "/pokemon";
 backUrl.searchParams.set(
 	"page",
@@ -53,7 +73,7 @@ backUrl.searchParams.set(
 );
 
 let imageUrl: string;
-const images = pokemonData.sprites;
+const images: Images = pokemonData.sprites;
 
 if (images.other?.["official-artwork"]?.front_default) {
 	imageUrl = images.other["official-artwork"]?.front_default;
@@ -66,7 +86,7 @@ if (images.other?.["official-artwork"]?.front_default) {
 
 <Layout pageTitle={pageTitle} headTitle={headTitle}>
 	<nav class="subnav flex">
-		<a href={backUrl}><h3>&larr; All Pokémon</h3></a>
+		<a href={backUrl.toString()}><h3>&larr; All Pokémon</h3></a>
 	</nav>
 	<Image src={imageUrl} alt={pageTitle} width={200} height={200} />
 	<h1>{pageTitle}</h1>
