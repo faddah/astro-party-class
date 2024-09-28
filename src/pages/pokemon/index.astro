@@ -66,7 +66,12 @@ const pageNumberClass =
 				results.map((pokemon: { name: string }) => {
 					return (
 						<li class="item">
-							<PokemonPreview pokemon={pokemon.name} />
+							<PokemonPreview pokemon={pokemon.name} server:defer>
+								<div slot="fallback">
+									<div class="poke-placeholder-img" />
+									<span class="poke-placeholder-text" />
+								</div>
+							</PokemonPreview>
 						</li>
 					);
 				})
@@ -108,7 +113,7 @@ const pageNumberClass =
 	.first-page-number {
 		display: flex;
 		align-items: center;
-		margin: 0.25rem 6.75rem;
+		margin: 0.25rem 7rem;
 	}
 
 	.last-page-number {
