@@ -8,6 +8,6 @@ export default defineConfig({
 	output: "hybrid",
   integrations: [react()],
 	experimental: {
-		serverIslands: true
+		serverIslands: true,
 	}
 });
