@@ -1,0 +1,28 @@
+---
+import { db, Idea } from "astro:db";
+import Layout from "../layouts/default.astro";
+import IdeaList from "../components/idea-list.astro";
+
+export const prerender: boolean = true;
+
+interface Idea {
+	id: number;
+	text: string;
+	good: boolean;
+	created_at: Date;
+}
+
+const headTitle: string = "Ideas 💡";
+const pageTitle: string = "💡 I'm The Idea Guy, Bay-bee!! 💡";
+
+const ideas: Idea[] = await db.select().from(Idea);
+---
+
+<Layout headTitle={headTitle} pageTitle={pageTitle}>
+	<h1>{pageTitle}</h1>
+
+	<section class="ideas-lists flex">
+		<IdeaList title="Good Ideas 💡" ideas={ideas.filter((idea) => idea.good)} />
+		<IdeaList title="Bad Ideas 💩" ideas={ideas.filter((idea) => !idea.good)} />
+	</section>
+</Layout>
