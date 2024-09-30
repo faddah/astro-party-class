@@ -1,0 +1,41 @@
+---
+export interface Props {
+	title: string;
+	ideas: Array<{ id: number; text: string; good: boolean; created_at: Date }>;
+}
+
+function formatDate(dateString: string): string {
+	const date: Date = new Date(dateString);
+	const options: object = {
+		weekday: "short",
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+		hour: "2-digit",
+		minute: "2-digit",
+		// second: "2-digit",
+		timeZone: "America/Los_Angeles",
+		timeZoneName: "short",
+	};
+	return new Intl.DateTimeFormat("en-US", options).format(date);
+}
+
+const { title, ideas } = Astro.props;
+---
+
+<div class="box">
+	<h2>{title}</h2>
+	<ul>
+		{
+			ideas.map((idea) => (
+				<Fragment key={idea.id}>
+					<li class="with-controls">
+						<div>
+							{idea.text} - Date Dreamed: {formatDate(idea.created_at)}
+						</div>
+					</li>
+				</Fragment>
+			))
+		}
+	</ul>
+</div>
