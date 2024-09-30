@@ -1,6 +1,15 @@
-import { defineDb } from 'astro:db';
+import { column, defineDb, defineTable } from 'astro:db';
 
 // https://astro.build/db/config
 export default defineDb({
-  tables: {}
+	tables: {
+		Idea: defineTable({
+			columns: {
+				id: column.number({ primaryKey: true }),
+				text: column.text(),
+				good: column.boolean(),
+				created_at: column.date(),
+			},
+		}),
+	}
 });
