@@ -8,7 +8,6 @@ export default defineDb({
 				id: column.number({ primaryKey: true }),
 				text: column.text(),
 				good: column.boolean(),
-				created_at: column.date(),
 			},
 		}),
 	}
