@@ -18,8 +18,9 @@ interface Server {
 export const server: Server = {
 	ideas: {
 		save: defineAction({
-			accept: 'form',
+			accept: "form",
 			input: z.object({
+				id: z.number(),
 				text: z.string(),
 				good: z.coerce.boolean(),
 			}),
