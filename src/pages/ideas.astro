@@ -16,13 +16,21 @@ const headTitle: string = "Ideas 💡";
 const pageTitle: string = "💡 I'm The Idea Guy, Bay-bee!! 💡";
 
 const ideas: Idea[] = await db.select().from(Idea);
+
+// type SaveActionResult = {
+// 	success: boolean;
+// 	data: Idea | null;
+// 	error?: string;
+// };
+
+// const result: SaveActionResult = Astro.getActionResult(actions.ideas.save);
 ---
 
 <Layout headTitle={headTitle} pageTitle={pageTitle}>
 	<h1>{pageTitle}</h1>
 
 	<section class="idea-form box">
-		<form action="/ideas" method="POST" action={actions.ideas.save}>
+		<form method="POST" action={actions.ideas.save}>
 			<label for="text">
 				<h3>Idea:</h3>
 				<input type="text" id="text" name="text" required />
