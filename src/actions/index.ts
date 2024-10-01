@@ -4,6 +4,7 @@ import { z } from "astro:content";
 
 
 interface IdeaInput {
+	id: number;
 	text: string;
 	good: boolean;
 }
@@ -24,15 +25,11 @@ export const server: Server = {
 				text: z.string(),
 				good: z.coerce.boolean(),
 			}),
-			handler: async (input: IdeaInput) => {
-				await db.insert(Idea).values(input);
+			handler: async (input) => {
+				await db.insert(Idea).values([input]);
 
 				return `Success! New ${input.good ? 'good' : 'bad'} idea added!`;
 			},
 		}),
 	},
-	handler: async (input: IdeaInput) => {
-		// Implement the handler logic here
-		return `Handled: ${input.text}`;
-	}
 }
