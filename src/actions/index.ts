@@ -13,7 +13,7 @@ interface Server {
 	ideas: {
 		save: ReturnType<typeof defineAction>;
 	};
-	handler: (input: IdeaInput) => Promise<string>;
+	handler: (input: FormData) => Promise<string>;
 }
 
 export const server: Server = {
@@ -26,7 +26,7 @@ export const server: Server = {
 				good: z.coerce.boolean(),
 			}),
 			handler: async (input) => {
-				await db.insert(Idea).values([input]);
+				await db.insert(Idea).values(input);
 
 				return `Success! New ${input.good ? 'good' : 'bad'} idea added!`;
 			},
