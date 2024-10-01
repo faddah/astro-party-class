@@ -1,4 +1,4 @@
-import { defineAction } from "astro:actions";
+import { defineAction, type SafeResult } from "astro:actions";
 import { db, Idea } from "astro:db";
 import { z } from "astro:content";
 
@@ -13,7 +13,9 @@ interface Server {
 	ideas: {
 		save: ReturnType<typeof defineAction>;
 	};
-	handler: (input: FormData) => Promise<string>;
+	handler: (input: FormData) => Promise<SafeResult<{ id: number; text: string; good: boolean; }, string>>;
+	queryString: string;
+	orThrow: (input: FormData) => Promise<SafeResult<{ id: number; text: string; good: boolean; }, string>>;
 }
 
 export const server: Server = {
