@@ -7,7 +7,6 @@ import IdeaList from "../components/idea-list.astro";
 export const prerender: boolean = false;
 
 interface Idea {
-	id: number;
 	text: string;
 	good: boolean;
 }
@@ -33,7 +32,7 @@ const ideas: Idea[] = await db.select().from(Idea);
 		<form method="POST" action={actions.ideas.save}>
 			<label for="text">
 				<h3>Idea:</h3>
-				<input type="text" id="text" name="text" required />
+				<input type="text" id="text" name="text" />
 			</label>
 
 			<fieldset>
