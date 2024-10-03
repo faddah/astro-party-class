@@ -23,7 +23,6 @@ export const server: Server = {
 		save: defineAction({
 			accept: "form",
 			input: z.object({
-				id: z.number(),
 				text: z.string(),
 				good: z.coerce.boolean(),
 			}),
@@ -34,4 +33,11 @@ export const server: Server = {
 			},
 		}),
 	},
+	handler: function (input: FormData): Promise<SafeResult<{ id: number; text: string; good: boolean; }, string>> {
+		throw new Error("Function not implemented.");
+	},
+	queryString: "",
+	orThrow: function (input: FormData): Promise<SafeResult<{ id: number; text: string; good: boolean; }, string>> {
+		throw new Error("Function not implemented.");
+	}
 }
