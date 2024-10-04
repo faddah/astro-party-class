@@ -1,6 +1,7 @@
 ---
-import { actions } from "astro:actions";
+import { actions, ActionError } from "astro:actions";
 import { db, Idea } from "astro:db";
+import Callout from "../components/callout.astro";
 import Layout from "../layouts/default.astro";
 import IdeaList from "../components/idea-list.astro";
 
@@ -16,19 +17,35 @@ const pageTitle: string = "💡 I'm The Idea Guy, Bay-bee!! 💡";
 
 const ideas: Idea[] = await db.select().from(Idea);
 
-// type SaveActionResult = {
-// 	success: boolean;
-// 	data: Idea | null;
-// 	error?: string;
-// };
+type SaveActionResult = {
+	success: { data: undefined; error: ActionError<never> };
+	data: Idea | null;
+	error?: string;
+};
 
-// const result: SaveActionResult = Astro.getActionResult(actions.ideas.save);
+const result: SaveActionResult = Astro.getActionResult(actions.ideas.save);
 ---
 
 <Layout headTitle={headTitle} pageTitle={pageTitle}>
 	<h1>{pageTitle}</h1>
 
 	<section class="idea-form box">
+		{
+			result && !result.error ? (
+				<Callout icon="✅" iconDescription="green checkbox">
+					<p>{result.data}</p>
+				</Callout>
+			) : null
+		}
+
+		{
+			result && result.error ? (
+				<Callout icon="🚨" iconDesc="flashing red alarm">
+					<p>{result.error}</p>
+				</Callout>
+			) : null
+		}
+
 		<form method="POST" action={actions.ideas.save}>
 			<label for="text">
 				<h3>Idea:</h3>
