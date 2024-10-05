@@ -59,5 +59,5 @@ export const server: Server = {
 	queryString: "",
 	orThrow: function (input: FormData): Promise<SafeResult<{ id: number; text: string; good: boolean; }, string>> {
 		throw new Error("Function not implemented.");
-	}
+	},
 }
