@@ -17,6 +17,15 @@ const { title, ideas } = Astro.props;
 				<Fragment key={idea.id}>
 					<li class="with-controls">
 						<div>{idea.text}</div>
+						<form method="POST" action={actions.ideas.delete}>
+							<input type="hidden" name="id" value={idea.id} />
+							<button type="submit" class="icon">
+								<span role="img" aria-label="trash can">
+									🗑️
+								</span>
+								<span class="sr-only">Delete Idea: "{idea.text}"</span>
+							</button>
+						</form>
 					</li>
 				</Fragment>
 			))
