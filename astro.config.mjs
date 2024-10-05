@@ -7,9 +7,10 @@ import db from '@astrojs/db';
 
 // https://astro.build/config
 export default defineConfig({
-    output: "hybrid",
+  output: "hybrid",
   integrations: [react(), db()],
-    experimental: {
-        serverIslands: true,
-    }
+
+  experimental: {
+      serverIslands: true,
+  }
 });
