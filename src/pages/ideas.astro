@@ -7,6 +7,11 @@ import IdeaList from "../components/idea-list.astro";
 
 export const prerender: boolean = false;
 
+const loggedIn = Astro.cookies.get("logged-in")?.boolean() || false;
+if (!loggedIn) {
+	return Astro.redirect("/login");
+}
+
 interface Idea {
 	id: number;
 	text: string;
