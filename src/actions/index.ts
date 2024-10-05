@@ -30,8 +30,9 @@ export const server: Server = {
 			handler: async (input) => {
 				if (!input.text) {
 					throw new Error("Please provide a text for the idea");
-				}
-				if (input.text.length < 3) {
+				} else if (!input.good) {
+					throw new Error("Please choose the Radio Button for if this is a Good or Bad Idea.");
+				} else if (input.text.length < 3) {
 					throw new Error("Please provide a longer text for the idea");
 				}
 				if (!input.good) {
