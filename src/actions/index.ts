@@ -24,7 +24,7 @@ export const server: Server = {
 		save: defineAction({
 			accept: "form",
 			input: z.object({
-				text: z.string(),
+				text: z.string().optional(),
 				good: z.coerce.boolean(),
 			}),
 			handler: async (input) => {
