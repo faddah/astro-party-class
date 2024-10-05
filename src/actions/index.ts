@@ -35,9 +35,7 @@ export const server: Server = {
 				} else if (input.text.length < 3) {
 					throw new Error("Please provide a longer text for the idea");
 				}
-				if (!input.good) {
-					throw new Error("Please choose the Radio Button for if this is a Good or Bad Idea.");
-				}
+
 				await db.insert(Idea).values(input as { text: string; good: boolean });
 
 				return `Success! New ${input.good ? 'good' : 'bad'} idea added!`;
