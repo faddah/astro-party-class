@@ -15,8 +15,9 @@ interface Idea {
 
 const headTitle: string = "Ideas 💡";
 const pageTitle: string = "💡 I'm The Idea Guy, Bay-bee!! 💡";
-
-const ideas: Idea[] = await db.select().from(Idea);
+const ideas: Idea[] = await db
+	.select()
+	.from(Idea);
 
 type SaveActionResult = {
 	success: { data: undefined; error: ActionError<never> };
