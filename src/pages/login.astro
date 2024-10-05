@@ -1,0 +1,13 @@
+---
+import Layout from "../layouts/default.astro";
+
+const pageTitle = "Get Authenticated — Log in ✅";
+const headTitle = "Log in ✅";
+---
+
+<Layout pageTitle={pageTitle} headTitle={headTitle}>
+	<h1>{pageTitle}</h1>
+	<form action="/api/toggle-auth" method="POST">
+		<button type="submit">Log In</button>
+	</form>
+</Layout>
