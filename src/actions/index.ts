@@ -12,6 +12,7 @@ interface IdeaInput {
 interface Server {
 	ideas: {
 		save: ReturnType<typeof defineAction>;
+		delete: ReturnType<typeof defineAction>;
 	};
 	handler: (input: FormData) => Promise<SafeResult<{ id: number; text: string; good: boolean; }, string>>;
 	queryString: string;
