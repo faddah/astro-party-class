@@ -7,7 +7,7 @@ export const POST: APIRoute = ({ cookies, redirect }) => {
 	const isLoggedIn: boolean = cookies.get('logged-in')?.boolean() ?? false;
 
 	// toggle it to true/false
-	const newState = !isLoggedIn;
+	const newState: boolean = !isLoggedIn;
 
 	// update the cookie
 	cookies.set('logged-in', String(newState), { path: '/' });
