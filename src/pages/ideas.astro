@@ -49,7 +49,7 @@ const result: SaveActionResult = Astro.getActionResult(actions.ideas.save);
 
 		{
 			result && result.error ? (
-				<Callout icon="🚨" iconDesc="flashing red alarm">
+				<Callout icon="🚨" iconDescription="flashing red alarm">
 					<p>{result.error}</p>
 				</Callout>
 			) : null
