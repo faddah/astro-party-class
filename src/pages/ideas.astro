@@ -8,6 +8,7 @@ import IdeaList from "../components/idea-list.astro";
 export const prerender: boolean = false;
 
 interface Idea {
+	id: number;
 	text: string;
 	good: boolean;
 }
