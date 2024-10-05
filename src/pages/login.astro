@@ -3,20 +3,6 @@ import Layout from "../layouts/default.astro";
 
 export const prerender: boolean = false;
 
-if (Astro.request.method === "POST") {
-	// Validate login credentials here
-	const isValidLogin = true; // Replace with actual validation<p></p>
-	if (isValidLogin) {
-		Astro.cookies.set("logged-in", "true", {
-			path: "/",
-			httpOnly: true,
-			secure: import.meta.env.PROD, // Secure in production
-			sameSite: "strict",
-		});
-		return Astro.redirect("/ideas");
-	}
-}
-
 const pageTitle = "Get Authenticated — Log in ✅";
 const headTitle = "Log in ✅";
 ---
