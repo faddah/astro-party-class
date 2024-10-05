@@ -15,9 +15,7 @@ interface Idea {
 
 const headTitle: string = "Ideas 💡";
 const pageTitle: string = "💡 I'm The Idea Guy, Bay-bee!! 💡";
-const ideas: Idea[] = await db
-	.select()
-	.from(Idea);
+const ideas: Idea[] = await db.select().from(Idea);
 
 type SaveActionResult = {
 	success: { data: undefined; error: ActionError<never> };
@@ -69,7 +67,7 @@ const result: SaveActionResult = Astro.getActionResult(actions.ideas.save);
 		</form>
 	</section>
 
-	<section class="ideas-lists flex">
+	<section class="list flex">
 		<IdeaList title="Good Ideas 💡" ideas={ideas.filter((idea) => idea.good)} />
 		<IdeaList title="Bad Ideas 💩" ideas={ideas.filter((idea) => !idea.good)} />
 	</section>
