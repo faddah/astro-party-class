@@ -15,5 +15,5 @@ export const POST: APIRoute = ({ cookies, redirect }) => {
 	});
 
 	// redirect to the ideas page
-	return redirect('/ideas', 302);
+	return redirect("/ideas", 302);
 }
