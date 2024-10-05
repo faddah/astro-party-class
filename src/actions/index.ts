@@ -1,5 +1,5 @@
 import { defineAction, type SafeResult } from "astro:actions";
-import { db, Idea } from "astro:db";
+import { db, eq, Idea } from "astro:db";
 import { z } from "astro:content";
 
 
