@@ -4,7 +4,7 @@ export const prerender = false;
 
 export const POST: APIRoute = ({ cookies, redirect }) => {
 	// get current status of th cookie for login
-	const isLoggedIn = cookies.get('logged-in');
+	const isLoggedIn = cookies.get('logged-in')?.boolean();
 
 	// toggle it to true/false
 	const newState = !isLoggedIn;
