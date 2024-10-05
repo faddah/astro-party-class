@@ -42,6 +42,16 @@ export const server: Server = {
 				return `Success! New ${input.good ? 'good' : 'bad'} idea added!`;
 			},
 		}),
+		delete: defineAction({
+			accept: "form",
+			input: z.object({
+				id: z.number(),
+			}),
+			handler: async (input) => {
+				await db.delete(Idea).where(eq(Idea.id, input.id));
+				return `Success! Idea ${input.id} deleted!`;
+			},
+		}),
 	},
 	handler: function (input: FormData): Promise<SafeResult<{ id: number; text: string; good: boolean; }, string>> {
 		throw new Error("Function not implemented.");
