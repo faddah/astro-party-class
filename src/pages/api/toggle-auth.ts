@@ -10,7 +10,9 @@ export const POST: APIRoute = ({ cookies, redirect }) => {
 	const newState: boolean = !isLoggedIn;
 
 	// update the cookie
-	cookies.set('logged-in', String(newState), { path: '/' });
+	cookies.set('logged-in', newState.toString(), {
+		path: "/"
+	});
 
 	// redirect to the ideas page
 	return redirect('/ideas', 302);
