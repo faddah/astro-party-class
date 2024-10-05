@@ -34,6 +34,10 @@ const result: SaveActionResult = Astro.getActionResult(actions.ideas.save);
 <Layout headTitle={headTitle} pageTitle={pageTitle}>
 	<h1>{pageTitle}</h1>
 
+	<form action="/api/toggle-auth" method="post">
+		<button type="submit">Log Out</button>
+	</form>
+
 	<section class="idea-form box">
 		{
 			result && !result.error ? (
