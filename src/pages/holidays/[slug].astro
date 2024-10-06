@@ -36,7 +36,6 @@ const { Content } = await holiday.render();
 			loading="eager"
 			transition:name={`holiday-img-${holiday.slug}`}
 			transition:animate="initial"
-			transition:durations={300}
 		/>
 		<p>{holiday.data.tags.map((tag: string) => `#${tag}`).join(" ")}</p>
 
@@ -48,8 +47,7 @@ const { Content } = await holiday.render();
 	<div class="holiday-content">
 		<h1
 			transition:name={`holiday-title-${holiday.slug}`}
-			transition:animate="initial"
-			transitioin:duration={300}>
+			transition:animate="initial">
 			{holiday.data.title}
 		</h1>
 
