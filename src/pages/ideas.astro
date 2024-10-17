@@ -1,6 +1,7 @@
 ---
-import { actions, ActionError } from "astro:actions";
-import { db, Idea } from "astro:db";
+import { actions } from "astro:actions";
+import { turso } from "../turso";
+// import { db, Idea } from "astro:db";
 import Callout from "../components/callout.astro";
 import Layout from "../layouts/default.astro";
 import IdeaList from "../components/idea-list.astro";
@@ -20,15 +21,40 @@ interface Idea {
 
 const headTitle: string = "Ideas 💡";
 const pageTitle: string = "💡 I'm The Idea Guy, Bay-bee!! 💡";
-const ideas: Idea[] = await db.select().from(Idea);
+// const ideas: Idea[] = await db.select().from(Idea);
+const ideas: Idea[] = await turso
+	.execute({
+		sql: "SELECT * FROM ideas",
+		args: [],
+	})
+	.then((result) =>
+		result.rows.map((row) => ({
+			id: row.id as number,
+			text: row.text as string,
+			good: Boolean(row.good as number),
+		}))
+	)
+	.catch((error) => {
+		console.error("Error fetching ideas:", error);
+		return [];
+	});
 
+/* 
 type SaveActionResult = {
 	success: { data: undefined; error: ActionError<never> };
 	data: Idea | null;
 	error?: string;
 };
+ */
 
-const result: SaveActionResult = Astro.getActionResult(actions.ideas.save);
+const formData = new FormData();
+formData.append(
+	"text",
+	"Faddah is recognized as an amazing Full Stack Developer"
+);
+formData.append("good", "true");
+
+const result = await actions.ideas.save(formData);
 ---
 
 <Layout headTitle={headTitle} pageTitle={pageTitle}>
