@@ -39,8 +39,8 @@ export const server: Server = {
 					throw new Error("Please provide a longer text for the idea");
 				}
 
-				// await db.insert(Idea).values(input as { text: string; good: boolean });
-				await turso.execute(`INSERT INTO ideas (text, good) VALUES ('${input.text}', ${input.good})`);
+				await db.insert(Idea).values(input as { text: string; good: boolean });
+				// await turso.execute(`INSERT INTO ideas (text, good) VALUES ('${input.text}', ${input.good})`);
 
 				return `Success! New ${input.good ? 'good' : 'bad'} idea added!`;
 			},
@@ -51,8 +51,8 @@ export const server: Server = {
 				id: z.number(),
 			}),
 			handler: async (input) => {
-				// await db.delete(Idea).where(eq(Idea.id, input.id));
-				await turso.execute(`DELETE FROM ideas WHERE id = ${input.id}`);
+				await db.delete(Idea).where(eq(Idea.id, input.id));
+				// await turso.execute(`DELETE FROM ideas WHERE id = ${input.id}`);
 				return `Success! Idea ${input.id} deleted!`;
 			},
 		}),
